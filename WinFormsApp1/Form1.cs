@@ -29,7 +29,10 @@ namespace WinFormsApp1
             if (ValidateLogin(username, password))
             {
                 MessageBox.Show("Login berhasil!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+                this.Hide();
+                Dashboard dashboard = new Dashboard();
+                dashboard.Show();
+
             }
             else
             {
