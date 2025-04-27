@@ -5,6 +5,11 @@
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button btnBookLoan;
+        private System.Windows.Forms.Button btnBookReturn;
+        private System.Windows.Forms.Button btnAllBook;
+        private System.Windows.Forms.Button btnAddBook;
+        private System.Windows.Forms.Button btnUsers;
 
         protected override void Dispose(bool disposing)
         {
@@ -17,44 +22,121 @@
 
         private void InitializeComponent()
         {
-            this.lblWelcome = new System.Windows.Forms.Label();
-            this.btnLogout = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            lblWelcome = new Label();
+            btnLogout = new Button();
+            btnBookLoan = new Button();
+            btnBookReturn = new Button();
+            btnAllBook = new Button();
+            btnAddBook = new Button();
+            btnUsers = new Button();
+            SuspendLayout();
             // 
             // lblWelcome
             // 
-            this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.lblWelcome.Location = new System.Drawing.Point(100, 50);
-            this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(140, 24);
-            this.lblWelcome.TabIndex = 0;
-            this.lblWelcome.Text = "Welcome, User!";
+            lblWelcome.AutoSize = true;
+            lblWelcome.Font = new Font("Arial", 16F, FontStyle.Bold);
+            lblWelcome.ForeColor = Color.MidnightBlue;
+            lblWelcome.Location = new Point(20, 20);
+            lblWelcome.Name = "lblWelcome";
+            lblWelcome.Size = new Size(200, 32);
+            lblWelcome.TabIndex = 0;
+            lblWelcome.Text = "Welcome, User!";
+            lblWelcome.Click += lblWelcome_Click;
+
+            // 
+            // btnBookLoan
+            // 
+            btnBookLoan.Font = new Font("Arial", 12F);
+            btnBookLoan.Location = new Point(30, 80);
+            btnBookLoan.Name = "btnBookLoan";
+            btnBookLoan.Size = new Size(180, 40);
+            btnBookLoan.TabIndex = 1;
+            btnBookLoan.Text = "Book Loan";
+            btnBookLoan.UseVisualStyleBackColor = true;
+            btnBookLoan.Click += button1_Click;
+
+            // 
+            // btnBookReturn
+            // 
+            btnBookReturn.Font = new Font("Arial", 12F);
+            btnBookReturn.Location = new Point(30, 130);
+            btnBookReturn.Name = "btnBookReturn";
+            btnBookReturn.Size = new Size(180, 40);
+            btnBookReturn.TabIndex = 2;
+            btnBookReturn.Text = "Book Return";
+            btnBookReturn.UseVisualStyleBackColor = true;
+
+            // 
+            // btnAllBook
+            // 
+            btnAllBook.Font = new Font("Arial", 12F);
+            btnAllBook.Location = new Point(30, 180);
+            btnAllBook.Name = "btnAllBook";
+            btnAllBook.Size = new Size(180, 40);
+            btnAllBook.TabIndex = 3;
+            btnAllBook.Text = "All Books";
+            btnAllBook.UseVisualStyleBackColor = true;
+
+            // 
+            // btnAddBook
+            // 
+            btnAddBook.Font = new Font("Arial", 12F);
+            btnAddBook.Location = new Point(30, 230);
+            btnAddBook.Name = "btnAddBook";
+            btnAddBook.Size = new Size(180, 40);
+            btnAddBook.TabIndex = 4;
+            btnAddBook.Text = "Add Books";
+            btnAddBook.UseVisualStyleBackColor = true;
+            btnAddBook.Click += btnAddBook_Click;
+
+            // 
+            // btnUsers
+            // 
+            btnUsers.Font = new Font("Arial", 12F);
+            btnUsers.Location = new Point(30, 280);
+            btnUsers.Name = "btnUsers";
+            btnUsers.Size = new Size(180, 40);
+            btnUsers.TabIndex = 5;
+            btnUsers.Text = "Users";
+            btnUsers.UseVisualStyleBackColor = true;
+
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(100, 100);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(100, 30);
-            this.btnLogout.TabIndex = 1;
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            btnLogout.Font = new Font("Arial", 10F, FontStyle.Bold);
+            btnLogout.ForeColor = Color.White;
+            btnLogout.BackColor = Color.Crimson;
+            btnLogout.Location = new Point(350, 320);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(120, 40);
+            btnLogout.TabIndex = 6;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = false;
+            btnLogout.Click += btnLogout_Click;
+
             // 
-            // DashboardForm
+            // Dashboard
             // 
-            this.ClientSize = new System.Drawing.Size(300, 200);
-            this.Controls.Add(this.btnLogout);
-            this.Controls.Add(this.lblWelcome);
-            this.Name = "DashboardForm";
-            this.Text = "Dashboard";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(500, 400);
+            Controls.Add(lblWelcome);
+            Controls.Add(btnBookLoan);
+            Controls.Add(btnBookReturn);
+            Controls.Add(btnAllBook);
+            Controls.Add(btnAddBook);
+            Controls.Add(btnUsers);
+            Controls.Add(btnLogout);
+            FormBorderStyle = FormBorderStyle.None;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Dashboard";
+            BackColor = Color.LightGray;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            // Kembali ke form login
             this.Hide();
             Form1 loginForm = new Form1();
             loginForm.Show();

@@ -10,11 +10,27 @@ using System.Windows.Forms;
 
 namespace WinFormsApp1
 {
-    public partial class Dashboard: Form
+    public partial class Dashboard : Form
     {
         public Dashboard()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            BookLoanForm loanForm = new BookLoanForm();
+            loanForm.Show();
+        }
+
+        private void lblWelcome_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddBook_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
