@@ -30,7 +30,20 @@ namespace WinFormsApp1
 
         private void btnAddBook_Click(object sender, EventArgs e)
         {
+            AddBook addBookForm = new AddBook();
+            addBookForm.ShowDialog(); // modal form
+        }
 
+
+        private void Dashboard_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAllBook_Click(object sender, EventArgs e)
+        {
+            AllBook addBookForm = new AllBook();
+            addBookForm.ShowDialog();
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient; 
+using MongoDB.Bson;
+using MongoDB.Driver;
+
 namespace WinFormsApp1
 {
     public partial class BookLoanForm : Form
     {
-        private string connectionString = "server=localhost;database=db_login;uid=root;pwd=;";
-
         public BookLoanForm()
         {
             InitializeComponent();
@@ -21,33 +21,27 @@ namespace WinFormsApp1
                 int loanPeriod = int.Parse(txtLoanPeriod.Text.Trim());
                 DateTime loanDate = dtpLoanDate.Value;
 
-                using (MySqlConnection conn = new MySqlConnection(connectionString))
-                {
-                    conn.Open();
+                var db = Connection.GetDatabase();
+                var collection = db.GetCollection<BsonDocument>("book_loans");
 
-                    string query = "INSERT INTO book_loans (book_id, user_id, loan_period, loan_date) " +
-                                   "VALUES (@bookId, @userId, @loanPeriod, @loanDate)";
+                var doc = new BsonDocument
+        {
+            { "book_id", bookId },
+            { "user_id", userId },
+            { "loan_period", loanPeriod },
+            { "loan_date", loanDate }
+        };
 
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@bookId", bookId);
-                        cmd.Parameters.AddWithValue("@userId", userId);
-                        cmd.Parameters.AddWithValue("@loanPeriod", loanPeriod);
-                        cmd.Parameters.AddWithValue("@loanDate", loanDate);
+                collection.InsertOne(doc);
 
-                        int rowsAffected = cmd.ExecuteNonQuery();
+                MessageBox.Show("Book loan record inserted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Book loan record inserted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ClearFields();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Failed to insert the book loan record.", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                }
+                // Menutup form BookLoanForm
+                this.Close();
+
+                // Membuka form Dashboard
+                Dashboard dashboardForm = new Dashboard();
+                dashboardForm.Show();
             }
             catch (Exception ex)
             {
@@ -55,12 +49,18 @@ namespace WinFormsApp1
             }
         }
 
+
         private void ClearFields()
         {
             txtBookId.Text = "";
             txtUserId.Text = "";
             txtLoanPeriod.Text = "";
             dtpLoanDate.Value = DateTime.Now;
+        }
+
+        private void BookLoanForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

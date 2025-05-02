@@ -1,4 +1,7 @@
-using MySql.Data.MySqlClient;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Windows.Forms;
 
 namespace WinFormsApp1
 {
@@ -9,22 +12,10 @@ namespace WinFormsApp1
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-           
-        }
-
-        
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        
         private void button1_Click(object sender, EventArgs e)
         {
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
+            string username = txtUsername.Text.Trim();
+            string password = txtPassword.Text.Trim();
 
             if (ValidateLogin(username, password))
             {
@@ -32,7 +23,6 @@ namespace WinFormsApp1
                 this.Hide();
                 Dashboard dashboard = new Dashboard();
                 dashboard.Show();
-
             }
             else
             {
@@ -40,45 +30,25 @@ namespace WinFormsApp1
             }
         }
 
-        
         private bool ValidateLogin(string username, string password)
         {
-            string connStr = "server=localhost;user=root;database=db_login;password=;";
-            using (MySqlConnection conn = new MySqlConnection(connStr))
+            try
             {
-                try
-                {
-                    conn.Open();
-                    string query = "SELECT * FROM users WHERE username=@username AND password=@password";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password);
+                var db = Connection.GetDatabase();
+                var collection = db.GetCollection<BsonDocument>("users");
 
-                    MySqlDataReader reader = cmd.ExecuteReader();
-                    return reader.HasRows; 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                    return false;
-                }
+                var filter = Builders<BsonDocument>.Filter.Eq("username", username) &
+                             Builders<BsonDocument>.Filter.Eq("password", password); // Gunakan hash untuk keamanan nyata
+
+                var user = collection.Find(filter).FirstOrDefault();
+
+                return user != null;
             }
-        }
-
-        
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtUsername_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                return false;
+            }
         }
     }
 }

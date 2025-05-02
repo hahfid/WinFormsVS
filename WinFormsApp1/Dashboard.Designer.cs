@@ -38,11 +38,23 @@
             lblWelcome.ForeColor = Color.MidnightBlue;
             lblWelcome.Location = new Point(20, 20);
             lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(200, 32);
+            lblWelcome.Size = new Size(257, 37);
             lblWelcome.TabIndex = 0;
             lblWelcome.Text = "Welcome, User!";
             lblWelcome.Click += lblWelcome_Click;
-
+            // 
+            // btnLogout
+            // 
+            btnLogout.BackColor = Color.Crimson;
+            btnLogout.Font = new Font("Arial", 10F, FontStyle.Bold);
+            btnLogout.ForeColor = Color.White;
+            btnLogout.Location = new Point(350, 320);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(120, 40);
+            btnLogout.TabIndex = 6;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = false;
+            btnLogout.Click += btnLogout_Click;
             // 
             // btnBookLoan
             // 
@@ -54,7 +66,6 @@
             btnBookLoan.Text = "Book Loan";
             btnBookLoan.UseVisualStyleBackColor = true;
             btnBookLoan.Click += button1_Click;
-
             // 
             // btnBookReturn
             // 
@@ -65,7 +76,6 @@
             btnBookReturn.TabIndex = 2;
             btnBookReturn.Text = "Book Return";
             btnBookReturn.UseVisualStyleBackColor = true;
-
             // 
             // btnAllBook
             // 
@@ -76,7 +86,7 @@
             btnAllBook.TabIndex = 3;
             btnAllBook.Text = "All Books";
             btnAllBook.UseVisualStyleBackColor = true;
-
+            btnAllBook.Click += btnAllBook_Click;
             // 
             // btnAddBook
             // 
@@ -88,7 +98,6 @@
             btnAddBook.Text = "Add Books";
             btnAddBook.UseVisualStyleBackColor = true;
             btnAddBook.Click += btnAddBook_Click;
-
             // 
             // btnUsers
             // 
@@ -99,26 +108,12 @@
             btnUsers.TabIndex = 5;
             btnUsers.Text = "Users";
             btnUsers.UseVisualStyleBackColor = true;
-
-            // 
-            // btnLogout
-            // 
-            btnLogout.Font = new Font("Arial", 10F, FontStyle.Bold);
-            btnLogout.ForeColor = Color.White;
-            btnLogout.BackColor = Color.Crimson;
-            btnLogout.Location = new Point(350, 320);
-            btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(120, 40);
-            btnLogout.TabIndex = 6;
-            btnLogout.Text = "Logout";
-            btnLogout.UseVisualStyleBackColor = false;
-            btnLogout.Click += btnLogout_Click;
-
             // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.LightGray;
             ClientSize = new Size(500, 400);
             Controls.Add(lblWelcome);
             Controls.Add(btnBookLoan);
@@ -128,9 +123,10 @@
             Controls.Add(btnUsers);
             Controls.Add(btnLogout);
             FormBorderStyle = FormBorderStyle.None;
+            Name = "Dashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Dashboard";
-            BackColor = Color.LightGray;
+            Load += Dashboard_Load;
             ResumeLayout(false);
             PerformLayout();
         }
